@@ -6,7 +6,6 @@ import 'package:barang_hilang/components/rounded_input_field.dart';
 import 'package:barang_hilang/components/rounded_password_field.dart';
 import 'package:barang_hilang/contants.dart';
 import 'package:barang_hilang/home_page.dart';
-import 'package:barang_hilang/screens/login/components/login_form.dart';
 import 'package:barang_hilang/screens/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -146,6 +145,35 @@ class _LoginState extends State<Login> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ForgotPassword extends StatelessWidget {
+  const ForgotPassword({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(
+        vertical: 5,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {},
+            child: Text(
+              "Forgot password?",
+              style: TextStyle(
+                color: kPrimaryColor,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
