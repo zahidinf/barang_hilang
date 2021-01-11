@@ -1,3 +1,4 @@
+import 'package:barang_hilang/contants.dart';
 import 'package:flutter/material.dart';
 
 class BodySplashScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class BodySplashScreen extends StatelessWidget {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              color: Colors.redAccent,
+              color: kPrimaryColor,
             ),
           ),
           Column(

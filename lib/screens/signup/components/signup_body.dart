@@ -29,76 +29,89 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        width: size.width,
-        padding: const EdgeInsets.all(8),
-        child: Form(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "REGISTER",
-                style: TextStyle(
-                  color: kPrimaryColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 200,
+              floating: false,
+              pinned: true,
+              backgroundColor: kPrimaryColor,
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: Text(
+                  "BarangHilang.com",
+                  style: TextStyle(
+                    color: kPrimaryLightColor,
+                    fontSize: 18,
+                  ),
+                ),
+                background: Image.asset(
+                  "assets/images/wallpaper.png",
+                  fit: BoxFit.cover,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 5),
-                width: size.width * 0.8,
-                child: Divider(
-                  color: kPrimaryColor,
-                ),
+            ),
+          ];
+        },
+        body: Container(
+          width: size.width,
+          padding: const EdgeInsets.all(8),
+          child: Form(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RoundedInputField(
+                    controller: widget.fullName,
+                    validatorMessage: "Full name cannot be blank",
+                    hintText: "John Doe",
+                    labelText: "Full Name",
+                    icon: Icons.person,
+                  ),
+                  RoundedInputField(
+                    controller: widget.email,
+                    validatorMessage: "Email cannot be blank",
+                    hintText: "john.doe@baranghilang.com",
+                    labelText: "Email",
+                    icon: Icons.email,
+                  ),
+                  RoundedInputField(
+                    controller: widget.dateOfBirth,
+                    validatorMessage: "Date of birth cannot be blank",
+                    hintText: "dd-mm-yyyy",
+                    labelText: "Date of Birth",
+                    icon: Icons.calendar_today,
+                  ),
+                  RoundedPasswordField(
+                    controller: widget.password,
+                    validatorMessage: "Password cannot be blank",
+                    hintText: "Create password",
+                    labelText: "Password",
+                    icon: Icons.lock,
+                  ),
+                  RoundedButton(
+                    text: "CREATE ACCOUNT",
+                    press: () {},
+                    color: kPrimaryColor,
+                    textColor: kPrimaryLightColor,
+                  ),
+                  AlreadyHaveAnAccountCheck(
+                    login: false,
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return LoginPage();
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
-              RoundedInputField(
-                controller: widget.fullName,
-                validatorMessage: "Full name cannot be blank",
-                hintText: "John Doe",
-                labelText: "Full Name",
-                icon: Icons.person,
-              ),
-              RoundedInputField(
-                controller: widget.email,
-                validatorMessage: "Email cannot be blank",
-                hintText: "john.doe@baranghilang.com",
-                labelText: "Email",
-                icon: Icons.email,
-              ),
-              RoundedInputField(
-                controller: widget.dateOfBirth,
-                validatorMessage: "Date of birth cannot be blank",
-                hintText: "dd-mm-yyyy",
-                labelText: "Date of Birth",
-                icon: Icons.calendar_today,
-              ),
-              RoundedPasswordField(
-                controller: widget.password,
-                validatorMessage: "Password cannot be blank",
-                hintText: "Create password",
-                labelText: "Password",
-                icon: Icons.lock,
-              ),
-              RoundedButton(
-                text: "CREATE ACCOUNT",
-                press: () {},
-                color: kPrimaryColor,
-                textColor: kPrimaryLightColor,
-              ),
-              AlreadyHaveAnAccountCheck(
-                login: false,
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return LoginPage();
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
+            ),
           ),
         ),
       ),

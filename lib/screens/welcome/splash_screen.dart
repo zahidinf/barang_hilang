@@ -12,7 +12,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 1), () => runApp(LoginPage()));
+    Timer(Duration(seconds: 2), () => runApp(LoginPage()));
   }
 
   @override
