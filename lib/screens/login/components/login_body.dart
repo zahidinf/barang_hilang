@@ -1,7 +1,13 @@
+import 'package:barang_hilang/components/already_have_an_account_check.dart';
+import 'package:barang_hilang/components/line_divider.dart';
+import 'package:barang_hilang/components/rounded_button.dart';
+import 'package:barang_hilang/components/rounded_button_with_icon.dart';
+import 'package:barang_hilang/components/rounded_input_field.dart';
+import 'package:barang_hilang/components/rounded_password_field.dart';
 import 'package:barang_hilang/contants.dart';
 import 'package:barang_hilang/home_page.dart';
 import 'package:barang_hilang/screens/login/components/login_form.dart';
-import 'package:barang_hilang/screens/login/components/login_header.dart';
+import 'package:barang_hilang/screens/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -10,7 +16,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String alert = "Login to your account";
+  String alert = "";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController usernameInput = new TextEditingController();
@@ -20,6 +26,7 @@ class _LoginState extends State<Login> {
     if (_formKey.currentState.validate()) {
       if (usernameInput.text == "zahidinf" &&
           passwordInput.text == "abcd1234") {
+        alert = "";
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -60,10 +67,83 @@ class _LoginState extends State<Login> {
                 color: kPrimaryColor,
               ),
             ),
-            LoginForm(
-                formKey: _formKey,
-                usernameInput: usernameInput,
-                passwordInput: passwordInput),
+            Text(
+              alert,
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  RoundedInputField(
+                    controller: usernameInput,
+                    validatorMessage: "Username cannot be blank",
+                    hintText: "Your email or username",
+                    labelText: "Username",
+                    icon: Icons.person,
+                  ),
+                  RoundedPasswordField(
+                    controller: passwordInput,
+                    validatorMessage: "Password cannot be blank",
+                    hintText: "Enter your password",
+                    labelText: "Password",
+                    icon: Icons.lock,
+                  ),
+                  RoundedButton(
+                    text: "LOGIN",
+                    color: kPrimaryColor,
+                    textColor: kPrimaryLightColor,
+                    press: () => loginProcess(),
+                  ),
+                  ForgotPassword(),
+                  AlreadyHaveAnAccountCheck(
+                    login: true,
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return RegisterPage();
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  LineDivider(
+                    text: "OR LOGIN USING",
+                  ),
+                  RoundedButtonWithIcon(
+                    icon: "assets/icons/facebook.svg",
+                    iconColor: Colors.white,
+                    text: "FACEBOOK",
+                    color: Color(0xFF4267B2),
+                    textColor: Colors.white,
+                    press: () {},
+                  ),
+                  RoundedButtonWithIcon(
+                    icon: "assets/icons/twitter.svg",
+                    iconColor: Colors.white,
+                    text: "TWITTER",
+                    color: Color(0xFF1DA1F2),
+                    textColor: Colors.white,
+                    press: () {},
+                  ),
+                  RoundedButtonWithIcon(
+                    icon: "assets/icons/google-plus.svg",
+                    iconColor: Colors.white,
+                    text: "GOOGLE",
+                    color: Color(0xFFDB4437),
+                    textColor: Colors.white,
+                    press: () {},
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
